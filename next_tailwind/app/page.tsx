@@ -2,6 +2,10 @@ import Image from "next/image";
 import profile from '../public/logo.svg'
 
 
+const data = await fetch('http://frgarcia.com.br/next_tailwind/get/')
+const posts = await data.json()
+
+
 export default function Home() {
   return (
     <main>
@@ -100,6 +104,12 @@ export default function Home() {
         </div>
 
       </div>
+
+      <ul>
+      {posts.map((item: any) => (
+        <li key={item.id}>{item.name}</li>
+      ))}
+    </ul>
     </main>
     
   );

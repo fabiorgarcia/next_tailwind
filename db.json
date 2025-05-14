@@ -1,14 +1,20 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Panela",
-      "category": "Eletroportáteis"
+      "id": "1",
+      "name": "Cafeteira Espresso",
+      "category": "Eletroportáteis",
+      "price": "379,05",
+      "description": "A Lov é uma cafeteira de espressos e multibebidas da Tres. Na cor preta, ela é automática e de multipressão, com extração silenciosa garante cafés espressos perfeitos, bebidas cremosas, cafés filtrados e chás ao simples toque de um botão.",
+      "image": "https://a-static.mlcdn.com.br/280x210/cafeteira-espresso-3-coracoes-lov-preto/magazineluiza/236950400/fa6fb47c81a1aa56ad88dc5bbe4696f6.jpg"
     },
     {
-      "id": 2,
-      "name": "Martelo",
-      "category": "Ferramenta"
+      "id": "2",
+      "name": "Panela de Pressão Brinox",
+      "category": "Utilidades Domésticas",
+      "price": "189,99",
+      "description": "A Panela de Pressão Ceramic Life Pressure 4,2L Brinox conta com estrutura de alumínio e revestimento interno cerâmico, que cozinha os alimentos por igual e mais rápido, dissipando melhor o calor e proporcionando um maior aproveitamento de nutrientes dos alimentos. Com fechamento externo mais seguro, conta com 4 dispositivos de segurança (uma trava, duas válvulas de trabalho e um escape de segurança). Além disso, suas paredes externas possuem pintura metálica na cor preto, trazendo mais modernidade e destaque em sua cozinha. O cabo e alça de baquelite proporcionam mais resistência ao calor e melhor manuseio. Funciona em 3 tipos de fogões (gás, elétrico e vitrocerâmico).",
+      "image": "https://a-static.mlcdn.com.br/280x210/cafeteira-espresso-3-coracoes-lov-preto/magazineluiza/236950400/fa6fb47c81a1aa56ad88dc5bbe4696f6.jpg"
     }
   ]
 }

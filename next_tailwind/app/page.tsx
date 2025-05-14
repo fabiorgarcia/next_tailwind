@@ -2,7 +2,7 @@ import Image from "next/image";
 import profile from '../public/logo.svg'
 
 
-const data = await fetch('http://frgarcia.com.br/next_tailwind/get/')
+const data = await fetch('https://my-json-server.typicode.com/fabiorgarcia/next_tailwind/products')
 const posts = await data.json()
 
 
@@ -107,7 +107,7 @@ export default function Home() {
 
       <ul>
       {posts.map((item: any) => (
-        <li key={item.id}>{item.name}</li>
+        <li key={item.id}>{item.name}{item.category}</li>
       ))}
     </ul>
     </main>

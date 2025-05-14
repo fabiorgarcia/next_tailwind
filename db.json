@@ -1,0 +1,14 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Panela",
+      "category": "Eletroportáteis"
+    },
+    {
+      "id": 2,
+      "name": "Martelo",
+      "category": "Ferramenta"
+    }
+  ]
+}

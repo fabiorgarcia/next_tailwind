@@ -16,35 +16,56 @@ export default function Home() {
 
   const [listAll, setListAll] = useState(products);
   const [nameProd, setNameProd] = useState('');
+  const [priceInit, setPriceInit] = useState('');
+  const [priceEnd, setPriceEnd] = useState('');
   const [listProducts, setListProducts] = useState(products);
 
 
-
   function filterList(x:any) {
-    
     setNameProd(x);
-
     x = x.toUpperCase();
+    if (x) {
+      const result = [];
+      for (let i = 0; i < listProducts.length; i++) {
+        var y = listProducts[i].name.toUpperCase();
+        if  (y.startsWith(x)) {
+          result.push(listProducts[i])
+        }
+      setListProducts(result);
+      } 
+    
+    } 
+    
+    if (!x && priceInit == '') {
+      setListProducts(listAll);
+    }
+    
+  }
+
+
+
+  function filterPriceInit(x:any) {
+    setPriceInit(x);
+    x = parseInt(x);
 
     if (x) {
       const result = [];
-      for (let i = 0; i < products.length; i++) {
-        var y = products[i].name.toUpperCase();
-        if  (y.startsWith(x)) {
-          result.push(products[i])
-      }
 
+      for (let i = 0; i < listProducts.length; i++) {
+        var y = listProducts[i].price;
+        y = parseInt(y);
+        if  (y >= x) {
+          result.push(listProducts[i])
+        }
       setListProducts(result);
+      } 
+    
     } 
-    
-  } else {
-    setListProducts(listAll);
-  }
-   
+    if (!x && nameProd == '') {
+      setListProducts(listAll);
+    }
 
-    
   }
-
 
   
   return (
@@ -78,10 +99,15 @@ export default function Home() {
 
               <div className="flex gap-2">
                 <div className="w-full">
-                  <input type="number" id="default-datepicker"  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="De R$" />
+                  <input 
+                  type="number" 
+                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  placeholder="De R$"
+                  value={priceInit}
+                  onChange={(e) => filterPriceInit(e.target.value)}  />
                 </div>
                 <div className="w-full">
-                  <input type="number" id="default-datepicker"  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Até R$" />
+                  <input type="number"  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Até R$" />
                 </div>
               </div>
               

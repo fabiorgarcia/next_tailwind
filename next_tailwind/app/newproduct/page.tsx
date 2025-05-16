@@ -9,31 +9,13 @@ import ButtonCancel from "@/components/buttonCancel";
 
 
 
-
-fetch('https://my-json-server.typicode.com/fabiorgarcia/next_tailwind/products', {
-  method: 'POST',
-  body: JSON.stringify({
-    id: '3',
-    name: 'Pneu Aro 13 165/70R13 Goodyear',
-    category: "Automotivos",
-    price: "299,90",
-    description: "Hoje tem tantos modelos que pneus que você deve ficar perdido na hora de escolher um para o seu carro. Mas nem sempre um pneu é bom para o seu carro só porque é do tamanho da sua roda. ",
-    image: "https://a-static.mlcdn.com.br/800x560/pneu-aro-13-165-70r13-goodyear-83t-touring-direction-2/magazineluiza/235820400/330721c2c460828795a086e1222d9dfb.jpg"
-
-  }),
-  headers: {
-    'Content-type': 'application/json; charset=UTF-8',
-  },
-})
-  .then((response) => response.json())
-  .then((json) => console.log(json));
-
-export default function Product( ) {
+export default function Product( getDados:any ) {
 
 
 
 function validaForm(e:any) {
     e.preventDefault();
+    getDados = e;
 }
   
   

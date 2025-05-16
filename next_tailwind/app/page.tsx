@@ -15,8 +15,8 @@ export default function Home() {
 
   const [listAll, setListAll] = useState(products);
   const [nameProd, setNameProd] = useState('');
-  const [priceInit, setPriceInit] = useState(0);
-  const [priceEnd, setPriceEnd] = useState(0);
+  const [priceInit, setPriceInit] = useState('');
+  const [priceEnd, setPriceEnd] = useState('');
   const [listProducts, setListProducts] = useState(products);
 
   const [name, setName] = useState('');
@@ -69,12 +69,18 @@ function validaImage(x:any) {
 
     if (x) {
       var result = [];
+      var t_priceInit = 0;
+      if (priceInit) {
+
+         t_priceInit = parseInt(priceInit);
+      }
+
       for (let i = 0; i < listProducts.length; i++) {
         var t_name = listProducts[i].name.toUpperCase();
-        var t_price = listProducts[i].price.toUpperCase();
+        var t_price = listProducts[i].price;
         t_price = parseInt(t_price);
 
-        if  (t_name.startsWith(x) && priceInit <= t_price) {
+        if  (t_name.startsWith(x) || priceInit >= t_price) {
           result.push(listProducts[i])
         }
       setListProducts(result);
@@ -98,6 +104,29 @@ function validaImage(x:any) {
         var y = listProducts[i].price;
         y = parseInt(y);
         if  (y >= x) {
+          result.push(listProducts[i])
+        }
+      setListProducts(result);
+      } 
+    
+    } 
+    if (!x && nameProd == '') {
+      setListProducts(listAll);
+    }
+
+  }
+
+  function filterPriceEnd(x:any) {
+    setPriceEnd(x);
+    x = parseInt(x);
+
+    if (x) {
+      const result = [];
+
+      for (let i = 0; i < listProducts.length; i++) {
+        var y = listProducts[i].price;
+        y = parseInt(y);
+        if  (x >= y) {
           result.push(listProducts[i])
         }
       setListProducts(result);
@@ -154,7 +183,12 @@ function validaImage(x:any) {
                 </div>
                 <div className="w-full">
                   <span className="font-light text-sm font-medium text-gray-900 dark:text-white w-32">Até R$</span>
-                  <input type="number"  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Até R$" />
+                  <input 
+                  type="number"  
+                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  placeholder="Até R$"
+                  value={priceEnd}
+                  onChange={(e) => filterPriceEnd(e.target.value)}  />
                 </div>
               </div>
               

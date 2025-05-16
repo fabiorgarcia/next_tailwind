@@ -116,25 +116,25 @@ function validaImage(x:any) {
 
   }
 
-  function filterPriceEnd(x:any) {
-    setPriceEnd(x);
-    x = parseInt(x);
-
-    if (x) {
-      const result = [];
-
+  function filterPriceEnd(z:any) {
+    setPriceEnd(z);
+    z = parseInt(z);
+    if (z) {
+      var result3 = [];
       for (let i = 0; i < listProducts.length; i++) {
-        var y = listProducts[i].price;
-        y = parseInt(y);
-        if  (x >= y) {
-          result.push(listProducts[i])
+        var a = listProducts[i].price;
+        a = parseInt(a);
+        
+        if  (a >= z) {
+          result3.push(listProducts[i])
         }
-      setListProducts(result);
-      } 
-    
-    } 
-    if (!x && nameProd == '') {
+        
+      }
+    }
+    if (!z && nameProd == '') {
       setListProducts(listAll);
+    } else {
+      setListProducts(result3);
     }
 
   }

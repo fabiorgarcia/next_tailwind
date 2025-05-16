@@ -95,7 +95,7 @@ export default function Home() {
 
         <div className="flex md:flex-row flex-col gap-2">
           
-          <div className="md:flex md:w-3/5 w-full gap-4">
+          <div className="md:flex md:w-3/4 w-full gap-4">
 
             <div className="md:w-1/2 w-full">
               <label htmlFor="default-search" className="font-light text-sm font-medium text-gray-900 dark:text-white">Filtar por Nome de Produto</label>
@@ -146,7 +146,7 @@ export default function Home() {
           </div>
 
 
-          <div className="md:flex  md:w-2/5 w-full justify-end-safe">
+          <div className="md:flex  md:w-1/4 w-full justify-end-safe">
             <div className="cursor-pointer mt-0 md:mt-6" onClick={() => setOpenModal(true)}>
               <ButtonSubmit label={'Cadastrar Novo Produto ✚'}  />
             </div>

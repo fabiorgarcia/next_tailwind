@@ -122,6 +122,10 @@ function validaImage(x:any) {
             result.push(listAll[i])
           }
         }
+        if  (priceEnd && nameProd) {
+          if (t_price > t_priceInit && t_price < parseInt(priceEnd) && t_name.startsWith(nameProd.toUpperCase()) )
+          result.push(listAll[i])
+        }
       setListProducts(result);
       } 
 

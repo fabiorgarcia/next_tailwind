@@ -1,4 +1,4 @@
-
+import Link from "next/link"
 interface TableProps {
     productsList: [];
 }
@@ -39,7 +39,7 @@ export default function Table({productsList}: TableProps) {
                     </div>
                     <div className="w-full md:w-1/7 p-1">
                     <label htmlFor="input-group-1" className="md:hidden block font-semibold text-sm font-medium text-gray-900 dark:text-white">Imagem</label>
-                    <div className="textShort">{item.image}</div>
+                    <div className="textShort text-blue-500"><Link href={item.image} target="_blank">{item.image}</Link></div>
                     </div>
                 </div>
           

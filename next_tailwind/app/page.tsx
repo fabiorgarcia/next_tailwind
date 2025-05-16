@@ -2,7 +2,6 @@
 
 import Header from "@/components/header";
 import Table from "@/components/table";
-import Link from "next/link"
 import ButtonSubmit from "@/components/buttonSubmit";
 import { useState } from "react";
 import ButtonCancel from "@/components/buttonCancel";
@@ -111,9 +110,6 @@ function validaImage(x:any) {
 
   }
 
-  function opemModal(){
-
-  }
 
   
   return (
@@ -168,7 +164,6 @@ function validaImage(x:any) {
 
 
           <div className="md:flex  md:w-1/2 w-full justify-end-safe">
-
             <div className="cursor-pointer mt-0 md:mt-6" onClick={() => setOpenModal(true)}>
               <ButtonSubmit label={'Cadastrar Novo Produto ✚'}  />
             </div>

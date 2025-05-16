@@ -16,29 +16,35 @@ export default function Home() {
 
   const [listAll, setListAll] = useState(products);
   const [nameProd, setNameProd] = useState('');
-  const [priceInit, setPriceInit] = useState('');
-  const [priceEnd, setPriceEnd] = useState('');
+  const [priceInit, setPriceInit] = useState(0);
+  const [priceEnd, setPriceEnd] = useState(0);
   const [listProducts, setListProducts] = useState(products);
 
 
   function filterList(x:any) {
     setNameProd(x);
     x = x.toUpperCase();
+
+
     if (x) {
-      const result = [];
+      var result = [];
       for (let i = 0; i < listProducts.length; i++) {
-        var y = listProducts[i].name.toUpperCase();
-        if  (y.startsWith(x)) {
+        var t_name = listProducts[i].name.toUpperCase();
+        var t_price = listProducts[i].price.toUpperCase();
+        t_price = parseInt(t_price);
+
+        if  (t_name.startsWith(x) && priceInit <= t_price) {
           result.push(listProducts[i])
         }
       setListProducts(result);
       } 
-    
-    } 
-    
-    if (!x && priceInit == '') {
+    } else {
       setListProducts(listAll);
     }
+
+    
+    console.log(priceInit);
+    
     
   }
 
@@ -95,10 +101,12 @@ export default function Home() {
             </div>
 
             <div className="md:w-1/2 w-full">
-              <label htmlFor="default-search" className="font-light text-sm font-medium text-gray-900 dark:text-white">Filtar por Faixa de Preço</label>
 
               <div className="flex gap-2">
+
                 <div className="w-full">
+                  <label htmlFor="default-search" className="font-light text-sm font-medium text-gray-900 dark:text-white">De R$</label>
+
                   <input 
                   type="number" 
                   className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
@@ -107,6 +115,7 @@ export default function Home() {
                   onChange={(e) => filterPriceInit(e.target.value)}  />
                 </div>
                 <div className="w-full">
+                  <span className="font-light text-sm font-medium text-gray-900 dark:text-white w-32">Até R$</span>
                   <input type="number"  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Até R$" />
                 </div>
               </div>

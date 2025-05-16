@@ -59,20 +59,20 @@ export default function Home() {
         t_price = parseInt(t_price);
 
         if  (priceEnd && !nameProd) {
-          if (t_price > t_priceInit && t_price < parseInt(priceEnd) )
+          if (t_price >= t_priceInit && t_price < parseInt(priceEnd) )
           result.push(listAll[i])
         }
         if  (!priceEnd && !nameProd && priceInit) {
-          if (t_price > t_priceInit )
+          if (t_price >= t_priceInit )
           result.push(listAll[i])
         }
         if  (!priceEnd && nameProd) {
-          if (t_price > t_priceInit && t_name.startsWith(nameProd.toUpperCase())) {
+          if (t_price >= t_priceInit && t_name.startsWith(nameProd.toUpperCase())) {
             result.push(listAll[i])
           }
         }
         if  (priceEnd && nameProd) {
-          if (t_price > t_priceInit && t_price < parseInt(priceEnd) && t_name.startsWith(nameProd.toUpperCase()) )
+          if (t_price >= t_priceInit && t_price <= parseInt(priceEnd) && t_name.startsWith(nameProd.toUpperCase()) )
           result.push(listAll[i])
         }
       setListProducts(result);

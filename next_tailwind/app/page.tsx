@@ -93,50 +93,42 @@ function validaImage(x:any) {
     
   }
 
-  function filterPriceInit(x:any) {
-    setPriceInit(x);
-    x = parseInt(x);
 
-    if (x) {
-      const result = [];
 
-      for (let i = 0; i < listProducts.length; i++) {
-        var y = listProducts[i].price;
-        y = parseInt(y);
-        if  (y >= x) {
-          result.push(listProducts[i])
+  function filterForm() {
+    if (nameProd || priceInit || priceEnd) {
+      let t_priceInit = 0;
+      if (priceInit) {
+        t_priceInit = parseInt(priceInit);
+      }
+
+
+      var result = [];
+      for (let i = 0; i < listAll.length; i++) {
+        var t_name = listAll[i].name.toUpperCase();
+        var t_price = listAll[i].price;
+        t_price = parseInt(t_price);
+
+        if  (priceEnd && !nameProd) {
+          if (t_price > t_priceInit && t_price < parseInt(priceEnd) )
+          result.push(listAll[i])
+        }
+        if  (!priceEnd && !nameProd && priceInit) {
+          if (t_price > t_priceInit )
+          result.push(listAll[i])
+        }
+        if  (!priceEnd && nameProd) {
+          if (t_price > t_priceInit && t_name.startsWith(nameProd.toUpperCase())) {
+            result.push(listAll[i])
+          }
         }
       setListProducts(result);
       } 
-    
-    } 
-    if (!x && nameProd == '') {
-      setListProducts(listAll);
-    }
 
-  }
 
-  function filterPriceEnd(z:any) {
-    setPriceEnd(z);
-    z = parseInt(z);
-    if (z) {
-      var result3 = [];
-      for (let i = 0; i < listProducts.length; i++) {
-        var a = listProducts[i].price;
-        a = parseInt(a);
-        
-        if  (a >= z) {
-          result3.push(listProducts[i])
-        }
-        
-      }
-    }
-    if (!z && nameProd == '') {
-      setListProducts(listAll);
     } else {
-      setListProducts(result3);
+      setListProducts(listAll);
     }
-
   }
 
 
@@ -150,7 +142,7 @@ function validaImage(x:any) {
 
         <div className="flex md:flex-row flex-col gap-2">
           
-          <div className="md:flex md:w-1/2 w-full gap-4">
+          <div className="md:flex md:w-3/5 w-full gap-4">
 
             <div className="md:w-1/2 w-full">
               <label htmlFor="default-search" className="font-light text-sm font-medium text-gray-900 dark:text-white">Filtar por Nome de Produto</label>
@@ -163,32 +155,36 @@ function validaImage(x:any) {
                 <input type="text" id="default-search" className="sm:mb-0 mb-2 w-full flex-auto block p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                 placeholder="Procure pelo Nome do Produto..." 
                 value={nameProd}
-                onChange={(e) => filterList(e.target.value)} />
+                onChange={(e) => setNameProd(e.target.value)} />
               </div>
             </div>
 
-            <div className="md:w-1/2 w-full">
+            <div className="md:w-1/2  w-full">
 
-              <div className="flex gap-2">
+              <div className="flex gap-2 w-full">
 
                 <div className="w-full">
                   <label htmlFor="default-search" className="font-light text-sm font-medium text-gray-900 dark:text-white">De R$</label>
 
                   <input 
                   type="number" 
-                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                  placeholder="De R$"
+                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  placeholder="R$"
                   value={priceInit}
-                  onChange={(e) => filterPriceInit(e.target.value)}  />
+                  onChange={(e) => setPriceInit(e.target.value)}  />
                 </div>
                 <div className="w-full">
                   <span className="font-light text-sm font-medium text-gray-900 dark:text-white w-32">Até R$</span>
                   <input 
                   type="number"  
-                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full ps-10 p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
-                  placeholder="Até R$"
+                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  placeholder="R$"
                   value={priceEnd}
-                  onChange={(e) => filterPriceEnd(e.target.value)}  />
+                  onChange={(e) => setPriceEnd(e.target.value)}  />
+                </div>
+
+                <div className="w-full ">
+                  <div onClick={() => filterForm()} className="mt-6 w-full"><ButtonCancel label={'Filtrar'} /></div>
                 </div>
               </div>
               
@@ -197,7 +193,7 @@ function validaImage(x:any) {
           </div>
 
 
-          <div className="md:flex  md:w-1/2 w-full justify-end-safe">
+          <div className="md:flex  md:w-2/5 w-full justify-end-safe">
             <div className="cursor-pointer mt-0 md:mt-6" onClick={() => setOpenModal(true)}>
               <ButtonSubmit label={'Cadastrar Novo Produto ✚'}  />
             </div>
@@ -229,7 +225,7 @@ function validaImage(x:any) {
                     </div>
                     <div className="md:w-1/2 w-full">
                       <label htmlFor="price" className="Tablefont-semibold text-sm font-medium text-gray-900 dark:text-white">Preço</label>
-                      <input type="text" id="price" value={price} onChange={(e)=>validaPrice(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite a Preço" required />
+                      <input type="number" step="0.01" id="price" value={price} onChange={(e)=>validaPrice(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Digite a Preço" required />
                     </div>
                   </div>
                   <div className="w-full p-1">

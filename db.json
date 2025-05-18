@@ -1,7 +1,7 @@
 {
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Cafeteira Espresso",
       "category": "Eletroportáteis",
       "price": "379,05",
@@ -9,7 +9,7 @@
       "image": "https://a-static.mlcdn.com.br/280x210/cafeteira-espresso-3-coracoes-lov-preto/magazineluiza/236950400/fa6fb47c81a1aa56ad88dc5bbe4696f6.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Panela de Pressão Brinox",
       "category": "Utilidades Domésticas",
       "price": "189,99",

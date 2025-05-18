@@ -24,6 +24,7 @@ export default function Home() {
   const [description, setDescription] = useState('');
   const [image, setImage] = useState('');
   const [openModal, setOpenModal] = useState(false);
+  const [orderby, setOrderby] = useState('');
 
 
   function validaForm(e:any) {
@@ -84,36 +85,42 @@ export default function Home() {
   }
 
   function orderBy(colun:any) {
-
-    if (colun) {
-      var sortResult = [];
-      var convetPrice = [];
-      for (let i = 0; i < listProducts.length; i++) { 
-        console.log(listProducts[i]);
-      }
-
-      if (colun == 'name') {
-        listProducts.sort((a:any, b:any) => a.name.localeCompare(b.name, 'pt-BR', { sensitivity: 'base' }));
-      }
-      if (colun == 'category') {
-        listProducts.sort((a:any, b:any) => a.category.localeCompare(b.category, 'pt-BR', { sensitivity: 'base' }));
-      }
-      if (colun == 'price') {
-        listProducts.sort((a:any, b:any) => a.price - b.price);
-      }
-      if (colun == 'description') {
-        listProducts.sort((a:any, b:any) => a.description.localeCompare(b.description, 'pt-BR', { sensitivity: 'base' }));
-      }
-      if (colun == 'image') {
-        listProducts.sort((a:any, b:any) => a.image.localeCompare(b.image, 'pt-BR', { sensitivity: 'base' }));
-      }
-
-      for (let i = 0; i < listProducts.length; i++) { 
-        sortResult.push(listProducts[i])
-      }
-      setListProducts(sortResult);
+    setOrderby(colun);
+    var sortResult = [];
+    if (colun == 'name') {
+      listProducts.sort((a:any, b:any) => a.name.localeCompare(b.name, 'pt-BR', { sensitivity: 'base' }));
     }
+    if (colun == 'category') {
+      listProducts.sort((a:any, b:any) => a.category.localeCompare(b.category, 'pt-BR', { sensitivity: 'base' }));
+    }
+    if (colun == 'price') {
+      listProducts.sort((a:any, b:any) => a.price - b.price);
+    }
+    if (colun == 'description') {
+      listProducts.sort((a:any, b:any) => a.description.localeCompare(b.description, 'pt-BR', { sensitivity: 'base' }));
+    }
+    if (colun == 'image') {
+      listProducts.sort((a:any, b:any) => a.image.localeCompare(b.image, 'pt-BR', { sensitivity: 'base' }));
+    }
+    if (colun == '') {
+      listProducts.sort((a:any, b:any) => a.id - b.id);
+    }
+    for (let i = 0; i < listProducts.length; i++) { 
+      sortResult.push(listProducts[i])
+    }
+    setListProducts(sortResult);
 
+  }
+
+  function newItem() {
+    setOpenModal(true);
+    setName('');
+    setCategory('');
+    setPrice('');
+    setDescription('');
+    setImage('');
+    var clearColun = '';
+    orderBy(clearColun)
   }
 
 
@@ -174,7 +181,7 @@ export default function Home() {
                 <div className="w-full md:my-0 my-4">
                   <span className="font-light text-sm font-medium text-gray-900 dark:text-white w-32">Ordenar por:</span>
 
-                  <select onChange={(e) => orderBy(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                  <select value={orderby} onChange={(e) => orderBy(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
                     <option value={''}></option>
                     <option value={'name'}>Nome</option>
                     <option value={'category'}>Categoria</option>
@@ -190,7 +197,7 @@ export default function Home() {
           </div>
 
           <div className="md:flex  md:w-1/4 w-full justify-end-safe">
-            <div className="cursor-pointer mt-0 md:mt-6" onClick={() => setOpenModal(true)}>
+            <div className="cursor-pointer mt-0 md:mt-6" onClick={() => newItem()}>
               <ButtonSubmit label={'Cadastrar Novo Produto ✚'}  />
             </div>
           </div>

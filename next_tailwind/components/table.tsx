@@ -4,7 +4,11 @@ interface TableProps {
 }
 
 
+
+
 export default function Table({productsList}: TableProps) {
+
+
 
     return (
         <div className="md:rounded-lg md:p-8 md:bg-white grid grid-cols-1 gap-4 ">

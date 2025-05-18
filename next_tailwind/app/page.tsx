@@ -5,8 +5,7 @@ import Table from "@/components/table";
 import ButtonSubmit from "@/components/buttonSubmit";
 import { useState } from "react";
 import ButtonCancel from "@/components/buttonCancel";
-import { setDefaultAutoSelectFamily } from "net";
-
+import ButtonFilter from "@/components/buttonFilter";
 
 const data = await fetch('https://my-json-server.typicode.com/fabiorgarcia/next_tailwind/products')
 var products = await data.json()
@@ -84,6 +83,39 @@ export default function Home() {
     }
   }
 
+  function orderBy(colun:any) {
+
+    if (colun) {
+      var sortResult = [];
+      var convetPrice = [];
+      for (let i = 0; i < listProducts.length; i++) { 
+        console.log(listProducts[i]);
+      }
+
+      if (colun == 'name') {
+        listProducts.sort((a:any, b:any) => a.name.localeCompare(b.name, 'pt-BR', { sensitivity: 'base' }));
+      }
+      if (colun == 'category') {
+        listProducts.sort((a:any, b:any) => a.category.localeCompare(b.category, 'pt-BR', { sensitivity: 'base' }));
+      }
+      if (colun == 'price') {
+        listProducts.sort((a:any, b:any) => a.price - b.price);
+      }
+      if (colun == 'description') {
+        listProducts.sort((a:any, b:any) => a.description.localeCompare(b.description, 'pt-BR', { sensitivity: 'base' }));
+      }
+      if (colun == 'image') {
+        listProducts.sort((a:any, b:any) => a.image.localeCompare(b.image, 'pt-BR', { sensitivity: 'base' }));
+      }
+
+      for (let i = 0; i < listProducts.length; i++) { 
+        sortResult.push(listProducts[i])
+      }
+      setListProducts(sortResult);
+    }
+
+  }
+
 
   
   return (
@@ -91,7 +123,6 @@ export default function Home() {
       <div className="flex flex-col gap-6 relative">
         
         <Header title='Gerenciamento de Produtos' />
-
 
         <div className="flex md:flex-row flex-col gap-2">
           
@@ -105,7 +136,7 @@ export default function Home() {
                         <path stroke="currentColor"  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                     </svg>
                 </div>
-                <input type="text" id="default-search" className="sm:mb-0 mb-2 w-full flex-auto block p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                <input type="text" id="default-search" className="sm:mb-0 mb-2 w-full flex-auto block p-2 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                 placeholder="Procure pelo Nome do Produto..." 
                 value={nameProd}
                 onChange={(e) => setNameProd(e.target.value)} />
@@ -114,14 +145,14 @@ export default function Home() {
 
             <div className="md:w-1/2  w-full">
 
-              <div className="flex gap-2 w-full">
+              <div className="md:flex gap-2 w-full">
 
                 <div className="w-full">
                   <label htmlFor="default-search" className="font-light text-sm font-medium text-gray-900 dark:text-white">De R$</label>
 
                   <input 
                   type="number" 
-                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                   placeholder="R$"
                   value={priceInit}
                   onChange={(e) => setPriceInit(e.target.value)}  />
@@ -130,21 +161,33 @@ export default function Home() {
                   <span className="font-light text-sm font-medium text-gray-900 dark:text-white w-32">Até R$</span>
                   <input 
                   type="number"  
-                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-4 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+                  className="sm:mb-0 mb-2 w-full  flex-auto bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
                   placeholder="R$"
                   value={priceEnd}
                   onChange={(e) => setPriceEnd(e.target.value)}  />
                 </div>
 
-                <div className="w-full ">
-                  <div onClick={() => filterForm()} className="mt-6 w-full"><ButtonCancel label={'Filtrar'} /></div>
+                <div className="w-full">
+                  <div onClick={() => filterForm()} className="mt-6 w-full"><ButtonFilter label={'Filtrar'} /></div>
+                </div>
+
+                <div className="w-full md:my-0 my-4">
+                  <span className="font-light text-sm font-medium text-gray-900 dark:text-white w-32">Ordenar por:</span>
+
+                  <select onChange={(e) => orderBy(e.target.value)} className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500">
+                    <option value={''}></option>
+                    <option value={'name'}>Nome</option>
+                    <option value={'category'}>Categoria</option>
+                    <option value={'price'}>Preço</option>
+                    <option value={'description'}>Descrição</option>
+                    <option value={'image'}>Imagem</option>
+                  </select>
                 </div>
               </div>
               
             </div>
 
           </div>
-
 
           <div className="md:flex  md:w-1/4 w-full justify-end-safe">
             <div className="cursor-pointer mt-0 md:mt-6" onClick={() => setOpenModal(true)}>

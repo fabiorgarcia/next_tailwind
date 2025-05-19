@@ -43,14 +43,12 @@ export default function Home() {
     setOpenModal(false);
   }
 
-
   function filterForm() {
     if (nameProd || priceInit || priceEnd) {
       let t_priceInit = 0;
       if (priceInit) {
         t_priceInit = parseInt(priceInit);
       }
-
 
       var result = [];
       for (let i = 0; i < listAll.length; i++) {
@@ -214,8 +212,8 @@ export default function Home() {
               <form onSubmit={(e)=> validaForm(e)}>
                 <div className="flex flex-col p-8 bg-white rounded-lg gap-4 border-gray-200">
                   <div className="flex gap-2">
-                  <h1 className="text-2xl font-semibold tracking-tight text-pretty text-gray-900 "> ⁄ Cadastro de Novos Produtos</h1>
-                </div>
+                    <h1 className="text-2xl font-semibold tracking-tight text-pretty text-gray-900 "> ⁄ Cadastro de Novos Produtos</h1>
+                  </div>
               
                   <div className="w-full p-1">
                     <label htmlFor="name" className="Tablefont-semibold text-sm font-medium text-gray-900 dark:text-white">Nome do Produto</label>
@@ -253,7 +251,6 @@ export default function Home() {
           )}
 
         
-
       </div>
     </main>
   );
